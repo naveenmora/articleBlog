@@ -1,0 +1,8 @@
+
+<%= nested_comments @comment.subtree.arrange(:order => :created_at) %>
+<%# @comment.subtree.each do |subtree| %>
+	<%#= render 'comments/reply', comment: subtree %>
+<%# end %>
+
+<p><%#= link_to "Back to All Articles", articles_path %></p>
+

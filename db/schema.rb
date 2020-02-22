@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_054235) do
+ActiveRecord::Schema.define(version: 2020_02_22_061934) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 2020_02_22_054235) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "message"
+    t.string "ancestry"
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_comments_on_ancestry"
+    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -1,0 +1,6 @@
+<div class="message">
+	<div>Commented_by: <%= comment.user.email %> on <%= comment.created_at.strftime("%B %d, %Y") %></div>
+  <div class="content">
+    <%= link_to comment.message, article_comment_path(comment.article_id, comment.id) %>
+  </div>
+</div>
