@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     # byebug
     if @comment.save!
-    	redirect_to @article, notice: 'Comment was added.'    	
+    	redirect_to articles_path, notice: 'Comment was added.'    	
     end
   end
 

@@ -1,7 +1,7 @@
 <div class="reply-form">
 	<%= form_with(model: [ @article, @article.comments.build ], local: true) do |f| %>
    <%= f.hidden_field :parent_id, :value => comment.id %>
-   <%= f.text_field :message %>
+   <%= f.text_field :message%>
    <%= f.submit "Reply"%>
 <% end %>
 </div>

@@ -7,13 +7,18 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @article.image %>
+  <%= image_tag(@article.image.url, class: "img-responsive", :size => "500x500") %>
 </p>
 
 <p>
   <strong>Text:</strong>
   <%= @article.text %>
 </p>
-
+<%= "#{@article.comments.roots.count} comments" %>
+  <% if @article.comments.roots.count > 0 %>
+    <% @article.comments.roots.each do |comment| %>
+        <%= render 'comments/comment', comment: comment.root %>
+      <% end %>
+  <% end %>
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>

@@ -5,17 +5,20 @@
     <% @articles.each do |article| %>
       <div class="col-md-6">
         <%= link_to article.name, article %>
-        <%= article.image %>
+        <%= image_tag(article.image.url, class: "img-responsive", :size => "500x500") %>
         <%= article.text %>
         <%= "#{article.comments.roots.count} comments" %>
-        <% if article.comments.roots.count > 0%>
-          <% article.comments.roots.each do |comment| %>
-            <%= render 'comments/comment', comment: comment.root %>
+        <% if article.comments.roots.count > 0 %>
+          <% article.comments.limit(5).roots.each do |comment| %>
+              <%= render 'comments/comment', comment: comment.root %>
+            <% end %>
+          <% if article.comments.roots.count > 5%>
+            <%= link_to "View all #{article.comments.roots.count} comments", article %>
           <% end %>
+
         <% end %>
         
         <%= form_with(model: [ article, article.comments.build ], local: true) do |form| %>
-            <%= form.label :message %><br>
             <%= form.text_field :message %>
             <%= form.submit "Comment"%>
         <% end %>
