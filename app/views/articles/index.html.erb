@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row col-lg-12">
-  <div class="container">
+<div class="row">
     <% @articles.each do |article| %>
       <div class="col-md-6">
         <%= link_to article.name, article %>
         <%= image_tag(article.image.url, class: "img-responsive", :size => "500x500") %>
-        <%= article.text %>
-        <%= "#{article.comments.roots.count} comments" %>
+        <div class="row">
+          <div class="col-md-5">
+            Description: <%= article.text %>
+          </div>
+          <div class="col-md-3 offset-md-2">
+            <%= "#{article.comments.roots.count} comments" %>
+          </div>
+        </div>
         <% if article.comments.roots.count > 0 %>
           <% article.comments.limit(5).roots.each do |comment| %>
               <%= render 'comments/comment', comment: comment.root %>
@@ -24,7 +29,6 @@
         <% end %>
       </div>
     <% end %>
-  </div>
 </div>
 
 <br>
